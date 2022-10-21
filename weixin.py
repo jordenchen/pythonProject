@@ -10,14 +10,18 @@ import sys
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtWidgets import QHeaderView
+from PyQt5.QtGui import QIcon
+import ctypes
+ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID("myappid")#解决任务栏图标问题，不知道原理
 
 
 class Ui_Form(object):
 
     def __init__(self, Form):
         Form.setObjectName("Form")
-        Form.resize(796, 501)
+        # Form.setWindowTitle("微信订阅号监控") 不起作用
+        Form.setWindowIcon(QIcon("./pic/logo.ico"))
+        Form.resize(1000, 501)
         self.pushButton = QtWidgets.QPushButton(Form)
         self.pushButton.setGeometry(QtCore.QRect(40, 10, 121, 41))
         self.pushButton.setObjectName("pushButton")
@@ -28,7 +32,7 @@ class Ui_Form(object):
         self.textEdit.setReadOnly(True)
 
         self.tableWidget = QtWidgets.QTableWidget(Form)
-        self.tableWidget.setGeometry(QtCore.QRect(270, 70, 501, 401))
+        self.tableWidget.setGeometry(QtCore.QRect(270, 70, 701, 401))
         self.tableWidget.setObjectName("tableWidget")
         self.tableWidget.setColumnCount(4)
         # self.tableWidget.setRowCount(0)
@@ -36,9 +40,9 @@ class Ui_Form(object):
         # self.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Stretch)
         # self.tableWidget.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeToContents)
         self.tableWidget.setColumnWidth(0, 81)
-        self.tableWidget.setColumnWidth(1, 260)
-        self.tableWidget.setColumnWidth(2, 80)
-        self.tableWidget.setColumnWidth(3, 80)
+        self.tableWidget.setColumnWidth(1, 340)
+        self.tableWidget.setColumnWidth(2, 179)
+        self.tableWidget.setColumnWidth(3, 100)
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)

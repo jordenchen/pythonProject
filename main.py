@@ -16,6 +16,7 @@ from weixin import Ui_Form
 
 listALl = []
 
+
 def buttonClicked():
     print('clicked')
     row = ui.tableWidget.currentRow()
