@@ -41,6 +41,7 @@ def on_message(message, data):
 # F为公众号消息
 def main(target_process):
     session = frida.attach(target_process)
+    print("公众号")
     script = session.create_script("""
         var ModAddress = Process.findModuleByName('WeChatWin.dll');
         var hookAddress = ModAddress.base.add('0x759654');
@@ -48,12 +49,13 @@ def main(target_process):
             onEnter:function(args) {
                 var esi = this.context.esi;
                 var emu = Memory.readPointer(esi);
-                var leixing = Memory.readUtf16String(Memory.readPointer(emu.add('0x4C')));
-                if(leixing == 16){
+                
+                var leixing = Memory.readInt(emu.add('0x4C'));
+                if(leixing == 15){
                     var ebp = this.context.ebp;
                     var xmlPro = Memory.readPointer(ebp.add('0x6C'));
                     var xml = Memory.readUtf16String(Memory.readPointer(xmlPro.add('0x70')));
-                    send({'xml':xml});
+                    send({'xml':xml,'leixing':leixing});
                 };
             }
         } );
