@@ -26,17 +26,23 @@ class logthread(QThread):
         session = frida.attach("wechat.exe")
         print("启动成功")
         script = session.create_script("""
-                    var ModAddress = Process.findModuleByName('wechatwin.dll');
-                    var hookAddress = ModAddress.base.add('0x5bec6e');
-                    Interceptor.attach(hookAddress , {
-                        onEnter:function(args) {
-                            var edi1= this.context.edi;
-                            var xmlPro1 = Memory.readPointer(edi1);
-                            var xml = Memory.readUtf16String(Memory.readPointer(xmlPro1.add('0x70')));
-                            send({'xml':xml});
-                        }
-                    } );
-                    """)
+            var ModAddress = Process.findModuleByName('WeChatWin.dll');
+            var hookAddress = ModAddress.base.add('0x759654');
+            Interceptor.attach(hookAddress , {
+                onEnter:function(args) {
+                    var esi = this.context.esi;
+                    var emu = Memory.readPointer(esi);
+
+                    var leixing = Memory.readInt(emu.add('0x4C'));
+                    if(leixing == 15){
+                        var ebp = this.context.ebp;
+                        var xmlPro = Memory.readPointer(ebp.add('0x6C'));
+                        var xml = Memory.readUtf16String(Memory.readPointer(xmlPro.add('0x70')));
+                        send({'xml':xml});
+                    };
+                }
+            } );
+            """)
         script.on('message', self.on_message)
         # self.finishSignal.emit(message)
         script.load()
