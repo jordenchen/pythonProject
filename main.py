@@ -99,3 +99,5 @@ if __name__ == "__main__":
 
     mainwindow.show()  # 执行qmainwindow的show()方法，显示这个qmainwindow
     sys.exit(app.exec_())  # 使用exit()或者点击关闭按钮退出qapplication
+
+
