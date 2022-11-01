@@ -12,7 +12,7 @@ class logthread(QThread):
 
     def on_message(self, message, data):
         if message['type'] == 'send':
-            # print(message['payload']['xml'])
+            print(message['payload']['leixing'])
             self.finishSignal.emit(message['payload']['xml'])
 
         elif message['type'] == 'error':

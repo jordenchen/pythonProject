@@ -16,9 +16,6 @@ def on_message(message, data):
         # print(message)
         # print(message['payload']['resource'])
         print(message['payload']['xml'])
-        if message['payload']['xml2']:
-            print('xm2/n')
-            print(message['payload']['xml2'])
         # print(message['payload']['xml1'])
         # print(data)
         # base = message['payload']['wxid']
@@ -55,14 +52,9 @@ def main(target_process):
                 var msgUni = Memory.readPointer(esp.add('0x24'));
                 var msg = Memory.readPointer(msgUni.add('0x70'));
                 var xml = Memory.readUtf16String(msg);
-                var xml2 = '';                
-                if(Memory.readInt(esp.add('0x30')) != 0){
-                    var msgUni2 = Memory.readPointer(esp.add('0x30'));
-                    var msg2 = Memory.readPointer(msgUni2.add('0x70'));
-                    var xml2 = Memory.readUtf16String(msg2);
-                }
+            
               
-                send({'xml':xml,'xml2':xml2});
+                send({'xml':xml});
             }
         } );
         """)

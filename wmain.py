@@ -12,14 +12,14 @@ import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtGui import QIcon
 import ctypes
-ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID("myappid")#解决任务栏图标问题，不知道原理
+
+ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID("myappid")  # 解决任务栏图标问题，不知道原理
 
 
-class Ui_Form(object):
+class Ui_WeiXinForm(object):
 
-    def __init__(self, Form):
+    def setupUi(self, Form):
         Form.setObjectName("Form")
-        # Form.setWindowTitle("微信订阅号监控") 不起作用
         Form.setWindowIcon(QIcon("./pic/logo.ico"))
         Form.resize(1000, 501)
         self.pushButton = QtWidgets.QPushButton(Form)
@@ -49,5 +49,5 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "微信公众号监控"))
         self.pushButton.setText(_translate("Form", "启动微信监控"))
