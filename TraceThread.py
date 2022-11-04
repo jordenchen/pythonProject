@@ -13,7 +13,7 @@ class RunThread(QThread):
         self._attach()
 
     def _attach(self):
-        source = open('./js/hook_759654.js', 'r', encoding='utf8').read()
+        source = open('./js/hook_5FE9C0.js', 'r', encoding='utf8').read()
         session = frida.attach("wechat.exe")
         script = session.create_script(source)
         script.on('message', self.on_message)

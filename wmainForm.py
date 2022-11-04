@@ -1,4 +1,5 @@
 import sys
+import time
 from xml.dom.minidom import parseString
 
 from PyQt5 import QtCore, QtWidgets
@@ -29,6 +30,7 @@ class wmainForm(QMainWindow, Ui_WeiXinForm):
 
     def wxInfo(self, msg):
         listDYH = []
+        print(msg)
         if msg.strip().startswith("<msg>"):
             dom = parseString(msg)
             name = dom.getElementsByTagName('appname')[0].childNodes[0].nodeValue.strip()
@@ -68,7 +70,7 @@ class wmainForm(QMainWindow, Ui_WeiXinForm):
 
     def urlClicked(self):
         row = self.tableWidget.currentRow()
-        url = QUrl(self[row]['url'])
+        url = QUrl(self.listAll[row]['url'])
         if not QDesktopServices.openUrl(url):
             QtWidgets.QMessageBox.warning('Open Url', 'Could not open url')
 
