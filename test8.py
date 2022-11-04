@@ -20,11 +20,10 @@ def on_message(message, data):
         # print(message['payload']['xml'])
         print(message['payload']['xml_li'])
         for msg in message['payload']['xml_li']:
-            if msg:
-                if msg.strip().startswith("<msg>"):
-                    dom = parseString(msg)
-                    name = dom.getElementsByTagName('appname')[0].childNodes[0].nodeValue.strip()
-                    print(name)
+            if msg.strip().startswith("<msg>"):
+                dom = parseString(msg)
+                name = dom.getElementsByTagName('appname')[0].childNodes[0].nodeValue.strip()
+                print(name)
         # print(data)
         # base = message['payload']['wxid']
         # size = int(message['payload']['text'])

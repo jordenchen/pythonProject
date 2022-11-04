@@ -21,7 +21,8 @@ class RunThread(QThread):
 
     def on_message(self, message, data):
         if message['type'] == 'send':
-            self.finishSignal.emit(message['payload']['xml'])
-
+            for msg in message['payload']['xml_li']:
+                self.finishSignal.emit(msg)
         elif message['type'] == 'error':
+            print('error')
             self.finishSignal.emit(message)

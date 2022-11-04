@@ -33,8 +33,12 @@ class wmainForm(QMainWindow, Ui_WeiXinForm):
         print(msg)
         if msg.strip().startswith("<msg>"):
             dom = parseString(msg)
-            name = dom.getElementsByTagName('appname')[0].childNodes[0].nodeValue.strip()
-            print("name:" + name)
+            try:
+                name = dom.getElementsByTagName('appname')[0].childNodes[0].nodeValue.strip()
+                print("name:" + name)
+            except Exception as r:
+                print(r)
+                return
             items = dom.getElementsByTagName('item')
             for item in items:
                 dictDYH = {}
