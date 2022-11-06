@@ -16,6 +16,7 @@
                 var xml = Memory.readUtf16String(Memory.readPointer(Memory.readPointer(edi).add(pointer_jia)));
                 xml_li.push(xml);
              }
+            console.log('xml_li_fasong');
             send({'xml_li': xml_li});
         }
     });
