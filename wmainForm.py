@@ -8,6 +8,7 @@ from PyQt5.QtGui import QDesktopServices
 from PyQt5.QtWidgets import QMainWindow, QApplication, QTableWidgetItem, QPushButton
 
 from TraceThread import RunThread
+from utils.csvUtil import nameToTips
 from wmain import Ui_WeiXinForm
 
 
@@ -61,7 +62,12 @@ class wmainForm(QMainWindow, Ui_WeiXinForm):
                 detail.clicked.connect(self.urlClicked)
 
                 self.tableWidget.setRowCount(self.count + 1)
-                self.tableWidget.setItem(self.count, 0, QTableWidgetItem(name))
+                nameItem = QTableWidgetItem(name)
+                # 公众号名称提示厂牌及代理范围
+                if nameToTips(name):
+                    nameItem.setToolTip(nameToTips(name))
+                self.tableWidget.setItem(self.count, 0, nameItem)
+
                 self.tableWidget.setItem(self.count, 1, QTableWidgetItem(element['title']))
                 self.tableWidget.setItem(self.count, 2, QTableWidgetItem(element['pub_time']))
                 # ui.tableWidget.setItem(count, 3, QTableWidgetItem(element['url']))
