@@ -1,11 +1,14 @@
 {
-    "name": "WxSekorm-plugin",
-    "version": "0.1.0",
-    "manifest_version": 3,
-    "description": "表单填充",
-    "browser_action": {
-        "default_icon": "icon.png",
-        "default_title": "Todo List",
-        "default_popup": "popup.html"
-    }
+  "name": "WxSekorm",
+  "version": "1.0",
+  "manifest_version": 3,
+  "action": {},
+  "description": "Shows the Chromium release milestone a given code review was merged into.",
+   "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+  "background": {
+    "service_worker": "popup.js"
+  }
 }
