@@ -2,13 +2,15 @@
   "name": "WxSekorm",
   "version": "1.0",
   "manifest_version": 3,
-  "action": {},
+  "action": {
+    "default_popup": "popup.html"
+  },
   "description": "Shows the Chromium release milestone a given code review was merged into.",
    "permissions": [
     "activeTab",
-    "scripting"
-  ],
-  "background": {
-    "service_worker": "popup.js"
-  }
+     "tabs"
+  ]
+//  "background": {
+//    "service_worker": "background.js"
+//  }
 }

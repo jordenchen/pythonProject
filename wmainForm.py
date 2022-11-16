@@ -5,7 +5,7 @@ from xml.dom.minidom import parseString
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtCore import QUrl
 from PyQt5.QtGui import QDesktopServices
-from PyQt5.QtWidgets import QMainWindow, QApplication, QTableWidgetItem, QPushButton
+from PyQt5.QtWidgets import QMainWindow, QApplication, QTableWidgetItem, QPushButton, QInputDialog
 
 from TraceThread import RunThread
 from utils.csvUtil import nameToTips
@@ -22,12 +22,19 @@ class wmainForm(QMainWindow, Ui_WeiXinForm):
         self.listAll = []
 
     def initUi(self):
-        self.pushButton.clicked.connect(self.startMoniter)
+        self.pushButton.clicked.connect(self.setProcessId)
 
-    def startMoniter(self):
+    def setProcessId(self):
+        processId, ok = QInputDialog.getInt(self, "微信", "请输入进程ID")
+        self.th.processID = processId
         self.th.start()
         self.th.finishSignal.connect(self.wxInfo)
         self.textEdit.append("启动成功")
+
+    # def startMoniter(self):
+    #     self.th.start()
+    #     self.th.finishSignal.connect(self.wxInfo)
+    #     self.textEdit.append("启动成功")
 
     def wxInfo(self, msg):
         listDYH = []

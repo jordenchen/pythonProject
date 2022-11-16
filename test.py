@@ -1,4 +1,6 @@
 import sys
+from collections.abc import Sized
+
 from PySide6.QtCore import Qt, QUrl
 from PySide6.QtGui import QIcon, QPixmap, QDesktopServices
 from PySide6 import QtWidgets
@@ -17,7 +19,7 @@ servants = [("EMIYA", "Archer", "https://gamepress.gg/grandorder/servant/emiya")
             ("Kid Gilgamesh", "Archer", "https://gamepress.gg/grandorder/servant/kid-gilgamesh"),
             ("Edmond Dantes", "Avenger", "https://gamepress.gg/grandorder/servant/edmond-dantes"),
             ("Cu Chulainn (Alter)", "Berserker", "https://gamepress.gg/grandorder/servant/cu-chulainn-alter")]
-
+Sized()
 
 class MyWidget(QtWidgets.QTableWidget):
     def __init__(self):

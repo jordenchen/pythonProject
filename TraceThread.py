@@ -5,6 +5,7 @@ from PyQt5.QtCore import QThread, pyqtSignal
 class RunThread(QThread):
     # 输出信号
     finishSignal = pyqtSignal(str)
+    processID = 0
 
     def __init__(self, parent=None):
         super(RunThread, self).__init__(parent)
@@ -14,7 +15,7 @@ class RunThread(QThread):
 
     def _attach(self):
         source = open('./js/hook_5FE9C0.js', 'r', encoding='utf8').read()
-        session = frida.attach("wechat.exe")
+        session = frida.attach(self.processID)
         script = session.create_script(source)
         script.on('message', self.on_message)
         script.load()

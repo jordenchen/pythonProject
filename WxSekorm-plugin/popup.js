@@ -1,28 +1,34 @@
-function reddenPage() {
+// function reddenPage() {
+//
+//   window.location.href="https://cms.sekorm.com/content/nps/selfSubject/add" ;
+//   console.log(document.title);
+//   console.log(document.URL);
+// }
+//
+// chrome.action.onClicked.addListener((tab) => {
+//   if(!tab.url.includes("chrome://")) {
+//     chrome.scripting.executeScript({
+//       target: { tabId: tab.id },
+//       function: reddenPage
+//     });
+//   }
+// });
 
-  window.location.href="https://cms.sekorm.com/content/nps/selfSubject/add" ;
-  console.log(document.title);
-  console.log(document.URL);
-}
 
-chrome.action.onClicked.addListener((tab) => {
-  if(!tab.url.includes("chrome://")) {
-    chrome.scripting.executeScript({
-      target: { tabId: tab.id },
-      function: reddenPage
-    });
-  }
+const tabs = await chrome.tabs.query({active : true});
+const button = document.querySelector("button");
+
+button.addEventListener("click", async () => {
+  document.querySelector("ul").append(tabs[0].title+tabs[0].url);
+  chrome.tabs.create({url:"https://cms.sekorm.com/content/nps/selfSubject/add"},
+      (tab) => {
+          const url = tabs[0].url;
+          const title = tabs[0].title;
+          chrome.scripting.executeScript({files: ["content_script.js"]});
+      });
 });
 
 
-// chrome.tabs.query({active : true}).then(tabs => submitContent(tabs));
-//
-// function submitContent(tabs){
-//   const url = tabs[0].url;
-//   const title = tabs[0].title;
-//   console.log(url);
-//   console.log(title);
-// }
 
 // function getMilestone(tabs) {
 //   const div = document.createElement("div");
